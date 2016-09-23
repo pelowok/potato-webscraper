@@ -1,23 +1,15 @@
 from bs4 import BeautifulSoup
 
 
-def get_head_image( soup='' ):
+def get_head_image(soup=''):
 	"""retrieves image in header, if there is one"""
 
-	# test for <div id='imgHead'>
-	# head_img1 = soup.find("div", {"id": "imgHead"})
-	# if head_img1:
-	# 	output = head_img1
-	# else:
-	# 	output = []
-
-	# test for <section id='hero-rmm' data-image-source='foo'>
-	head_img2 = soup.find("section", {"data-image-source": True})
-	if head_img2:
-		output = str(head_img2)
+	if soup.find("section", {"id": "hero-rmm"}):
+		tag = soup.find("section", {"id": "hero-rmm"})['data-image-src']
+		print tag
+	elif soup.find("div", {"id": "theImage"}):
+		tag = soup.find("div", {"id": "theImage"})
 	else:
-		output = '!!!! NOT FOUND !!!!!!!'
+		tag = "potato"
 
-	print output
-
-	return output;
+	return tag
