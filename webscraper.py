@@ -7,7 +7,8 @@ from get_head_image import get_head_image
 
 styleError = xlwt.easyxf('font: name Times New Roman, color-index red, bold on')
 
-with open("url_short.p", "rU") as myfile:
+# with open("url_short.p", "rU") as myfile:
+with open("url.p", "rU") as myfile:
 	url_list = myfile.readlines()
 
 # create Excel workbook

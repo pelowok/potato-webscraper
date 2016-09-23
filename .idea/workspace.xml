@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b43ee78a-459c-45bf-93b4-310e1a955cd2" name="Default" comment="" />
+    <list default="true" id="b43ee78a-459c-45bf-93b4-310e1a955cd2" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="webscraper.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +25,13 @@
       <file leaf-file-name="webscraper.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webscraper.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="135">
               <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+=======
+            <state relative-caret-position="150">
+              <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+>>>>>>> get-head-image
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -35,8 +42,13 @@
       <file leaf-file-name="get_head_image.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/get_head_image.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="345">
               <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+=======
+            <state relative-caret-position="225">
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+>>>>>>> get-head-image
               <folding />
             </state>
           </provider>
@@ -71,14 +83,17 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/headerImage.py" />
         <option value="$PROJECT_DIR$/get_title.py" />
         <option value="$PROJECT_DIR$/url_short.p" />
-        <option value="$PROJECT_DIR$/get_head_image.py" />
         <option value="$PROJECT_DIR$/webscraper.py" />
+        <option value="$PROJECT_DIR$/get_head_image.py" />
       </list>
     </option>
   </component>
@@ -394,6 +409,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/webscraper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -455,9 +471,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+=======
+    <entry file="file://$PROJECT_DIR$/webscraper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+>>>>>>> get-head-image
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/get_head_image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
