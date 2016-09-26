@@ -1,14 +1,13 @@
 import xlwt
-import urllib2
+import requests
 
 from bs4 import BeautifulSoup
 from get_title import get_title
-from get_head_image import get_head_image
+from get_hero_image import get_hero_image
 
 styleError = xlwt.easyxf('font: name Times New Roman, color-index red, bold on')
 
-# with open("url_short.p", "rU") as myfile:
-with open("url.p", "rU") as myfile:
+with open("url_short.p", "rU") as myfile:
 	url_list = myfile.readlines()
 
 # create Excel workbook
@@ -19,24 +18,29 @@ ws = wb.add_sheet('testSheet', cell_overwrite_ok=True)
 
 # loop through URLs in url_list
 i = 0
+page = []
 for cor, url in enumerate(url_list):
 	i += 1
+	url = url.rstrip()
 	if url.startswith('http:'):
 		try:
-			page = urllib2.urlopen(url)
-			soup = BeautifulSoup(page.read(), "html.parser")
+			page = requests.get(url)
+			soup = BeautifulSoup(page.text, "html.parser")
 			site_title = get_title(soup)  # returns string
-			head_img = get_head_image(soup)  # returns [] or bs4.tag
-			# print str(i) + " : " + str(site_title) + ", " + str(head_img)
+			hero_img = get_hero_image(soup)  # returns [] or bs4.tag
 			if url:
 				ws.write(cor, 0, url)
 			if site_title:
 				ws.write(cor, 1, str(site_title))
-			if head_img:
-				ws.write(cor, 2, str(head_img))
-		except urllib2.HTTPError:
+			if hero_img:
+				ws.write(cor, 2, str(hero_img[0]))
+				ws.write(cor, 3, str(hero_img[1]))
+				ws.write(cor, 4, str(hero_img[2]))
+		except requests.exceptions.RequestException as e:  # This is the correct syntax
 			ws.write(cor, 0, url)
-			ws.write(cor, 1, str(urllib2.HTTPError), styleError)
+			ws.write(cor, 1, str(e), styleError)
+			print str(i) + " : " + e
 	else:
-		print str(i) + " : Not a URL (skipped) : " + str(url).strip()
+		print str(i) + " : n/a"
+		# print str(i) + " : Not a URL (skipped) : " + str(url).strip()
 wb.save('testBook.xls')
