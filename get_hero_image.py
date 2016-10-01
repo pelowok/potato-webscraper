@@ -20,7 +20,7 @@ def get_hero_image(soup=''):
 		tag1 = tag_img[0]["src"]
 		tag2 = tag_img[1]["src"]
 	else:
-		tag0 = "not found"
+		tag0 = "Hero image not found;"
 
 	tag = [tag0, tag1, tag2]
 

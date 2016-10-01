@@ -1,50 +1,197 @@
 import xlwt
 import requests
+import csv
 
 from bs4 import BeautifulSoup
-from get_title import get_title
-from get_hero_image import get_hero_image
+from get_site_title import get_site_title
 from get_content_title import get_content_title
+from get_content_subtitle import get_content_subtitle
 
+# declare vars
+i = 0
+page = []
+arr = []
+
+# create Excel workbook and wb.sheets
+wb = xlwt.Workbook(encoding='utf-8', style_compression=0)
+ws1 = wb.add_sheet('URLs', cell_overwrite_ok=True)
+ws2 = wb.add_sheet('content', cell_overwrite_ok=True)
+
+# declare xlwt styles for workbook
 styleError = xlwt.easyxf('font: name Times New Roman, color-index red, bold on')
 
+#  TODO: UNDEFINED VARIABLES LIST
+product_name = '{{my.product_name}}'
+page_language = '{{my.page_language}}'
+product_logo = '{{my.product_logo}}'
+banner_trust_icon = '{{my.banner_trust_icon}}'
+banner_trust_text = '{{my.banner_trust_text}}'
+body_header1 = '{{my.body_header1}}'
+body_content1 = '{{my.body_content1}}'
+body_header2 = '{{my.body_header2}}'
+body_content2 = '{{my.body_content2}}'
+body_header3 = '{{my.body_header3}}'
+body_content3 = '{{my.body_content3}}'
+body_header4 = '{{my.body_header4}}'
+body_content4 = '{{my.body_content4}}'
+awards_image = '{{my.awards_image}}'
+whitepaper_url = '{{my.whitepaper_url}}'
+column_content1 = '{{my.column_content1}}'
+columnn_content2 = '{{my.column_content2}}'
+columnn_content3 = '{{my.column_content3}}'
+testimonial_video1 = '{{my.testimonial_video1}}'
+testimonial_image1 = '{{my.testimonial_image1}}'
+testimonial_quote1 = '{{my.testimonial_quote1}}'
+testimonial_nametag1 = '{{my.testimonial_nametag1}}'
+testimonial_video2 = '{{my.testimonial_video2}}'
+testimonial_image2 = '{{my.testimonial_image2}}'
+testimonial_quote2 = '{{my.testimonial_quote2}}'
+testimonial_nametag2 = '{{my.testimonial_nametag2}}'
+form_header = '{{my.form_header}}'
+custom_body_html = '{{my.custom_body_html}}'
+
+# get the URLs from the external file
 with open("url_short.p", "rU") as myfile:
 	url_list = myfile.readlines()
 
-# create Excel workbook
-wb = xlwt.Workbook(encoding='utf-8', style_compression=0)
-
-# create wb.sheet
-ws = wb.add_sheet('testSheet', cell_overwrite_ok=True)
-
 # loop through URLs in url_list
-i = 0
-page = []
 for cor, url in enumerate(url_list):
+	arr = []
 	i += 1
-	url = url.rstrip()
-	if url.startswith('http:'):
+	site_url = url.rstrip()
+	ws1.write(cor, 0, site_url)
+
+	if site_url.startswith('http:'):
 		try:
-			page = requests.get(url)
+			page = requests.get(site_url)
 			soup = BeautifulSoup(page.text, "html.parser")
-			site_title = get_title(soup)  # returns string
-			hero_img = get_hero_image(soup)  # returns [] or bs4.tag
-			content_title = get_content_title(soup)
-			if url:
-				ws.write(cor, 0, url)
-			if site_title:
-				ws.write(cor, 1, str(site_title))
-			if hero_img:
-				ws.write(cor, 2, str(hero_img[0]))
-				ws.write(cor, 3, str(hero_img[1]))
-				ws.write(cor, 4, str(hero_img[2]))
-			if content_title:
-				ws.write(cor, 5, content_title)
+
+			# my.site_url
+			arr.append(site_url.encode('utf-8'))
+
+			# my.product_name
+			arr.append(product_name)
+
+			# my.page_language
+			arr.append(page_language)
+
+			# my.site_title
+			site_title = get_site_title(soup)
+			arr.append(site_title)  # returns string
+
+			# my.product_logo
+			arr.append(product_logo)
+
+			# my.content_title
+			arr.append(get_content_title(soup))
+
+			# my.content_subtitle
+			arr.append(get_content_subtitle(soup).encode('utf-8'))
+
+			# my.banner_trust_icon
+			arr.append(banner_trust_icon)
+
+			# my.banner_trust_text
+			arr.append(banner_trust_text)
+
+			# my.body_header1
+			arr.append(body_header1)
+
+			# my.body_content1
+			arr.append(body_content1)
+
+			# my.body_header2
+			arr.append(body_header2)
+
+			# my.body_content2
+			arr.append(body_content2)
+
+			# my.body_header3
+			arr.append(body_header3)
+
+			# my.body_content3
+			arr.append(body_content3)
+
+			# my.body_header4
+			arr.append(body_header4)
+
+			# my.body_content4
+			arr.append(body_content4)
+
+			# my.awards_image
+			arr.append(awards_image)
+
+			# my.whitepaper_url
+			arr.append(whitepaper_url)
+
+			# my.column_content1
+			arr.append(column_content1)
+
+			# my.columnn_content2
+			arr.append(columnn_content2)
+
+			# my.columnn_content3
+			arr.append(columnn_content3)
+
+			# my.testimonial_video1
+			arr.append(testimonial_video1)
+
+			# my.testimonial_image1
+			arr.append(testimonial_image1)
+
+			# my.testimonial_quote1
+			arr.append(testimonial_quote1)
+
+			# my.testimonial_nametag1
+			arr.append(testimonial_nametag1)
+
+			# my.testimonial_video2
+			arr.append(testimonial_video2)
+
+			# my.testimonial_image2
+			arr.append(testimonial_image2)
+
+			# my.testimonial_quote2
+			arr.append(testimonial_quote2)
+
+			# my.testimonial_nametag2
+			arr.append(testimonial_nametag2)
+
+			# my.form_header
+			arr.append(form_header)
+
+			# my.custom_body_html  (scripts)
+			arr.append(custom_body_html)
+
+			j = 0
+			for val in arr:
+				if val:
+					ws2.write(cor, j, val)
+				else:
+					ws2.write(cor, j, "")
+
+				j += 1
+
+			# if url:
+			# 	ws2.write(cor, 0, site_url)
+			# if url:
+			# 	ws2.write(cor, 1, product_name)
+			# if url:
+			# 	ws2.write(cor, 2, page_language)
+			# if site_title:
+			# 	ws2.write(cor, 3, site_title
+			# if content_title:
+			# 	ws2.write(cor, 7, content_title)
+			# if content_subtitle:
+			# 	ws2.write(cor, 8, content_subtitle)
+			#
+			# print arr
+
 		except requests.exceptions.RequestException as e:  # This is the correct syntax
-			ws.write(cor, 0, url)
-			ws.write(cor, 1, str(e), styleError)
-			print str(i) + " : " + e
+			ws1.write(cor, 1, str(e), styleError)
+			print str(i) + " : " + str(e)
 	else:
-		print str(i) + " : n/a"
-		# print str(i) + " : Not a URL (skipped) : " + str(url).strip()
-wb.save('testBook.xls')
+		ws1.write(cor, 1, "ERROR: URL does not begin with \'http:\'", styleError)
+		# print str(i) + " : ERROR: URL does not begin with \'http:\'"
+
+wb.save('webscrape.xls')
