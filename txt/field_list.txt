@@ -20,8 +20,8 @@ body_content4
 awards_image
 whitepaper_url
 column_content1
-columnn_content2
-columnn_content3
+column_content2
+column_content3
 testimonial_video1
 testimonial_image1
 testimonial_quote1
@@ -32,3 +32,8 @@ testimonial_quote2
 testimonial_nametag2
 form_header
 custom_body_html
+
+
+<div class="mktoText" id="site_url" mktoName="site_url">
+<div class="mktoText" id="product_name" mktoName="product_name">
+<div class="mktoText" id="page_language" mktoName="page_language">

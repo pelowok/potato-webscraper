@@ -3,7 +3,7 @@ import requests
 import csv
 
 from bs4 import BeautifulSoup
-from get_site_title import get_site_title
+from get_page_title import get_page_title
 from get_content_title import get_content_title
 from get_content_subtitle import get_content_subtitle
 
@@ -18,12 +18,18 @@ ws1 = wb.add_sheet('URLs', cell_overwrite_ok=True)
 ws2 = wb.add_sheet('content', cell_overwrite_ok=True)
 
 # declare xlwt styles for workbook
+styleHeader = xlwt.easyxf('font: name Arial, color-index blue, bold on, italic on')
 styleError = xlwt.easyxf('font: name Times New Roman, color-index red, bold on')
 
-#  TODO: UNDEFINED VARIABLES LIST
+# Here we initialize the many variables, and assign them a string that reflects
+# their token names in Marketo.
+site_url = '{{my.site_url}}'
 product_name = '{{my.product_name}}'
 page_language = '{{my.page_language}}'
+page_title = '{{my.site_title}}'
 product_logo = '{{my.product_logo}}'
+content_title = '{{my.content_title}}'
+content_subtitle = '{{my.content_subtitle}}'
 banner_trust_icon = '{{my.banner_trust_icon}}'
 banner_trust_text = '{{my.banner_trust_text}}'
 body_header1 = '{{my.body_header1}}'
@@ -37,8 +43,8 @@ body_content4 = '{{my.body_content4}}'
 awards_image = '{{my.awards_image}}'
 whitepaper_url = '{{my.whitepaper_url}}'
 column_content1 = '{{my.column_content1}}'
-columnn_content2 = '{{my.column_content2}}'
-columnn_content3 = '{{my.column_content3}}'
+column_content2 = '{{my.column_content2}}'
+column_content3 = '{{my.column_content3}}'
 testimonial_video1 = '{{my.testimonial_video1}}'
 testimonial_image1 = '{{my.testimonial_image1}}'
 testimonial_quote1 = '{{my.testimonial_quote1}}'
@@ -50,8 +56,53 @@ testimonial_nametag2 = '{{my.testimonial_nametag2}}'
 form_header = '{{my.form_header}}'
 custom_body_html = '{{my.custom_body_html}}'
 
+# append all the header values into the list "arr"
+arr.append(site_url)
+arr.append(product_name)
+arr.append(page_language)
+arr.append(page_title)
+arr.append(product_logo)
+arr.append(content_title)
+arr.append(content_subtitle)
+arr.append(banner_trust_icon)
+arr.append(banner_trust_text)
+arr.append(body_header1)
+arr.append(body_content1)
+arr.append(body_header2)
+arr.append(body_content2)
+arr.append(body_header3)
+arr.append(body_content3)
+arr.append(body_header4)
+arr.append(body_content4)
+arr.append(awards_image)
+arr.append(whitepaper_url)
+arr.append(column_content1)
+arr.append(column_content2)
+arr.append(column_content3)
+arr.append(testimonial_video1)
+arr.append(testimonial_image1)
+arr.append(testimonial_quote1)
+arr.append(testimonial_nametag1)
+arr.append(testimonial_video2)
+arr.append(testimonial_image2)
+arr.append(testimonial_quote2)
+arr.append(testimonial_nametag2)
+arr.append(form_header)
+arr.append(custom_body_html)
+
+# push the column headers into worksheet
+j = 0
+for val in arr:
+	if val:
+		ws2.write(0, j, val, styleHeader)
+	else:
+		ws2.write(0, j, "")
+
+	j += 1
+wb.save('webscrape.xls')
+
 # get the URLs from the external file
-with open("url_short.p", "rU") as myfile:
+with open("txt/url_short.p", "rU") as myfile:
 	url_list = myfile.readlines()
 
 # loop through URLs in url_list
@@ -60,6 +111,8 @@ for cor, url in enumerate(url_list):
 	i += 1
 	site_url = url.rstrip()
 	ws1.write(cor, 0, site_url)
+
+	print str(i) + " : " + site_url
 
 	if site_url.startswith('http:'):
 		try:
@@ -76,8 +129,8 @@ for cor, url in enumerate(url_list):
 			arr.append(page_language)
 
 			# my.site_title
-			site_title = get_site_title(soup)
-			arr.append(site_title)  # returns string
+			page_title = get_page_title(soup)
+			arr.append(page_title)  # returns string
 
 			# my.product_logo
 			arr.append(product_logo)
@@ -128,10 +181,10 @@ for cor, url in enumerate(url_list):
 			arr.append(column_content1)
 
 			# my.columnn_content2
-			arr.append(columnn_content2)
+			arr.append(column_content2)
 
 			# my.columnn_content3
-			arr.append(columnn_content3)
+			arr.append(column_content3)
 
 			# my.testimonial_video1
 			arr.append(testimonial_video1)
@@ -172,6 +225,8 @@ for cor, url in enumerate(url_list):
 
 				j += 1
 
+			wb.save('webscrape.xls')
+
 			# if url:
 			# 	ws2.write(cor, 0, site_url)
 			# if url:
@@ -190,8 +245,12 @@ for cor, url in enumerate(url_list):
 		except requests.exceptions.RequestException as e:  # This is the correct syntax
 			ws1.write(cor, 1, str(e), styleError)
 			print str(i) + " : " + str(e)
+	elif site_url.startswith("{{IMPORT HEADERS}}"):
+		print "skip to import column headers"
 	else:
 		ws1.write(cor, 1, "ERROR: URL does not begin with \'http:\'", styleError)
 		# print str(i) + " : ERROR: URL does not begin with \'http:\'"
 
-wb.save('webscrape.xls')
+		wb.save('webscrape.xls')
+
+

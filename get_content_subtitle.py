@@ -17,9 +17,22 @@ def get_content_subtitle(soup=''):
 		t = soup.find("h4", {"class": "white"}).contents
 		title = t[0].strip()
 	elif soup.find_all("div", {"class" : "bannerbox"}):
-		t = soup.find("div", {"class": "textOverImgBottom"}).contents
+
+		if soup.find("div", {"class", "textOverImgBottom"}):
+			t = soup.find("div", {"class": "textOverImgBottom"}).contents
+		elif soup.find("div", {"class" : "bannerbox"}).p.strong:
+			pset = soup.find("div", {"class" : "bannerbox"})
+			str0 = pset.find_all('p')[0].contents
+			str1 = str0[1]
+			print str1
+
+			t = [str1]
+
+		else:
+			t = "BANNERBOX ERROR : TRY AGAIN"
+
 		title = t[0]
-		main_title = soup.find("div", {"class": "textOverImgBottom"}).p
+
 	else:
 		title = "Content subtitle not found;"
 
