@@ -3,7 +3,7 @@
 site_url
 product_name
 page_language
-site_title
+page_title
 product_logo
 content_title
 content_subtitle
