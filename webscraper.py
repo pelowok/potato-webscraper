@@ -37,8 +37,10 @@ from get_content_subtitle import get_content_subtitle
 
 # declare vars
 i = 0
+j = 0
 page = []
 arr = []
+feedback = ""
 
 # create Excel workbook and wb.sheets
 wb = xlwt.Workbook(encoding='utf-8', style_compression=0)
@@ -135,15 +137,16 @@ with open("txt/url_short.p", "rU") as myfile:
 
 # loop through URLs in url_list
 for cor, url in enumerate(url_list):
+
 	arr = []
 	i += 1
+
+	feedback = str(i) + " : "
+
 	site_url = url.rstrip()
 	ws1.write(cor, 0, site_url)
 
-	# print str(i) + " : " + site_url
-
 	if site_url.startswith('http:'):
-		print str(i) + " : "
 		try:
 			page = requests.get(site_url)
 			soup = BeautifulSoup(page.text, "html.parser")
@@ -168,10 +171,13 @@ for cor, url in enumerate(url_list):
 			arr.append(product_logo)
 
 			# my.content_title
-			arr.append(get_content_title(soup))
+			content_title = get_content_title(soup)
+			arr.append(content_title)
 
 			# my.content_subtitle
-			arr.append(get_content_subtitle(soup))
+			content_subtitle = get_content_subtitle(soup)
+			arr.append(content_subtitle)
+			feedback += content_subtitle
 
 			# my.banner_trust_icon
 			arr.append(banner_trust_icon)
@@ -261,10 +267,12 @@ for cor, url in enumerate(url_list):
 
 		except requests.exceptions.RequestException as e:  # This is the correct syntax
 			ws1.write(cor, 1, str(e), styleError)
-			print str(e)
+			feedback += str(e)
 	elif site_url.startswith("{{IMPORT HEADERS}}"):
-		print str(i) + " : " "skip to import column headers"
+		feedback += "skip"
 	else:
 		ws1.write(cor, 1, "ERROR: URL does not begin with \'http:\'", styleError)
 		wb.save('webscrape.xls')
-		print str(i) + " : ERROR: URL does not begin with \'http:\'"
+		feedback += "skip"
+
+	print feedback

@@ -8,12 +8,6 @@ def get_product_name(soup=''):
 
 	prod = ""
 
-	# backup
-	# rm_msp
-	# mail
-	# ri
-	# rm_itpro
-
 	try:
 		logo = get_product_logo(soup).split("/")[-1]
 		prod = products[logo]()

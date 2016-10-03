@@ -9,6 +9,6 @@ def get_page_title(soup=''):
 		str_title = str_title.encode('utf-8')
 	else:
 		str_title = []
-		print "No page title found."
+		print "page_title not found"
 
 	return str_title;
