@@ -29,6 +29,6 @@ def get_page_language(url=''):
 	if "/nl-" in url:
 		lang = "NL"
 
-	print "lang : " + lang
+	# print "lang : " + lang
 
 	return lang

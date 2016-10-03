@@ -1,12 +1,11 @@
 import xlwt
 import requests
-import csv
 
 from bs4 import BeautifulSoup
 from get_product_name import get_product_name
 from get_page_language import get_page_language
 from get_page_title import get_page_title
-# from get_product_logo import get_product_logo
+from get_product_logo import get_product_logo
 from get_content_title import get_content_title
 from get_content_subtitle import get_content_subtitle
 # from get_banner_trust_icon import get_banner_trust_icon
@@ -165,6 +164,7 @@ for cor, url in enumerate(url_list):
 			arr.append(page_title)  # returns string
 
 			# my.product_logo
+			product_logo = get_product_logo(soup)
 			arr.append(product_logo)
 
 			# my.content_title
