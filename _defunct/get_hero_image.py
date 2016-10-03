@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 
 
 def get_hero_image(soup=''):
-	"""retrieves image in hero section, if there is one"""
+	"""DEFUNCT: no longer needed. retrieves image in hero section, if there is one"""
 
 	tag = []
 	tag0 = []

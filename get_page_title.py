@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 
 
 def get_page_title(soup=''):
-	"""retrieves the hero image form the various divs and sections in url.p"""
+	"""retrieves the page title, if there is one"""
 	str_title = soup.title
 
 	if str_title:

@@ -3,9 +3,38 @@ import requests
 import csv
 
 from bs4 import BeautifulSoup
+from get_product_name import get_product_name
+from get_page_language import get_page_language
 from get_page_title import get_page_title
+# from get_product_logo import get_product_logo
 from get_content_title import get_content_title
 from get_content_subtitle import get_content_subtitle
+# from get_banner_trust_icon import get_banner_trust_icon
+# from get_banner_trust_text import get_banner_trust_text
+# from get_body_header1 import get_body_header1
+# from get_body_content1 import get_body_content1
+# from get_body_header2 import get_body_header2
+# from get_body_content2 import get_body_content2
+# from get_body_header3 import get_body_header3
+# from get_body_content3 import get_body_content3
+# from get_body_header4 import get_body_header4
+# from get_body_content4 import get_body_content4
+# from get_awards_image import get_awards_image
+# from get_whitepaper_url import get_whitepaper_url
+# from get_column_content1 import get_column_content1
+# from get_column_content2 import get_column_content2
+# from get_column_content3 import get_column_content3
+# from get_testimonial_video1 import get_testimonial_video1
+# from get_testimonial_image1 import get_testimonial_image1
+# from get_testimonial_quote1 import get_testimonial_quote1
+# from get_testimonial_nametag1 import get_testimonial_nametag1
+# from get_testimonial_video1 import get_testimonial_video2
+# from get_testimonial_image1 import get_testimonial_image2
+# from get_testimonial_quote1 import get_testimonial_quote2
+# from get_testimonial_nametag1 import get_testimonial_nametag2
+# from get_testimonial_nametag1 import get_testimonial_nametag2
+# from get_form_header import get_form_header
+# from get_custom_body_html import get_custom_body_html
 
 # declare vars
 i = 0
@@ -112,9 +141,10 @@ for cor, url in enumerate(url_list):
 	site_url = url.rstrip()
 	ws1.write(cor, 0, site_url)
 
-	print str(i) + " : " + site_url
+	# print str(i) + " : " + site_url
 
 	if site_url.startswith('http:'):
+		print str(i) + " : "
 		try:
 			page = requests.get(site_url)
 			soup = BeautifulSoup(page.text, "html.parser")
@@ -123,9 +153,11 @@ for cor, url in enumerate(url_list):
 			arr.append(site_url.encode('utf-8'))
 
 			# my.product_name
+			product_name = get_product_name(soup)
 			arr.append(product_name)
 
 			# my.page_language
+			page_language = get_page_language(site_url)
 			arr.append(page_language)
 
 			# my.site_title
@@ -139,7 +171,7 @@ for cor, url in enumerate(url_list):
 			arr.append(get_content_title(soup))
 
 			# my.content_subtitle
-			arr.append(get_content_subtitle(soup).encode('utf-8'))
+			arr.append(get_content_subtitle(soup))
 
 			# my.banner_trust_icon
 			arr.append(banner_trust_icon)
@@ -227,30 +259,12 @@ for cor, url in enumerate(url_list):
 
 			wb.save('webscrape.xls')
 
-			# if url:
-			# 	ws2.write(cor, 0, site_url)
-			# if url:
-			# 	ws2.write(cor, 1, product_name)
-			# if url:
-			# 	ws2.write(cor, 2, page_language)
-			# if site_title:
-			# 	ws2.write(cor, 3, site_title
-			# if content_title:
-			# 	ws2.write(cor, 7, content_title)
-			# if content_subtitle:
-			# 	ws2.write(cor, 8, content_subtitle)
-			#
-			# print arr
-
 		except requests.exceptions.RequestException as e:  # This is the correct syntax
 			ws1.write(cor, 1, str(e), styleError)
-			print str(i) + " : " + str(e)
+			print str(e)
 	elif site_url.startswith("{{IMPORT HEADERS}}"):
-		print "skip to import column headers"
+		print str(i) + " : " "skip to import column headers"
 	else:
 		ws1.write(cor, 1, "ERROR: URL does not begin with \'http:\'", styleError)
-		# print str(i) + " : ERROR: URL does not begin with \'http:\'"
-
 		wb.save('webscrape.xls')
-
-
+		print str(i) + " : ERROR: URL does not begin with \'http:\'"

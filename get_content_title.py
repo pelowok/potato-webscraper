@@ -25,15 +25,15 @@ def get_content_title(soup=''):
 		title = t[0]
 
 	elif soup.find_all("span", {"class" : "bannerMainTitle"}):
-		print soup.find_all("span", {"class" : "bannerMainTitle"})
+		# print soup.find_all("span", {"class" : "bannerMainTitle"})
 		t = soup.find("span", {"class" : "bannerMainTitle"}).contents
 		try:
 			title = t[0]
 		except:
-			print "FAILED : " + str(t)
+			print "content_title not found"
 	else:
 		title = "Content title not found;"
 
-	print title
+	# print title
 
 	return title
