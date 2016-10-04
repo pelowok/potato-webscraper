@@ -2,6 +2,7 @@ import xlwt
 import requests
 
 from bs4 import BeautifulSoup
+from sorting_hat import sorting_hat
 from get_product_name import get_product_name
 from get_page_language import get_page_language
 from get_page_title import get_page_title
@@ -10,7 +11,7 @@ from get_content_title import get_content_title
 from get_content_subtitle import get_content_subtitle
 # from get_banner_trust_icon import get_banner_trust_icon
 # from get_banner_trust_text import get_banner_trust_text
-# from get_body_header1 import get_body_header1
+from get_body_header1 import get_body_header1
 # from get_body_content1 import get_body_content1
 # from get_body_header2 import get_body_header2
 # from get_body_content2 import get_body_content2
@@ -41,6 +42,7 @@ j = 0
 page = []
 arr = []
 feedback = ""
+page_template = "unknown"
 
 # create Excel workbook and wb.sheets
 wb = xlwt.Workbook(encoding='utf-8', style_compression=0)
@@ -60,8 +62,8 @@ page_title = '{{my.site_title}}'
 product_logo = '{{my.product_logo}}'
 content_title = '{{my.content_title}}'
 content_subtitle = '{{my.content_subtitle}}'
-banner_trust_icon = '{{my.banner_trust_icon}}'
-banner_trust_text = '{{my.banner_trust_text}}'
+# banner_trust_icon = '{{my.banner_trust_icon}}'
+# banner_trust_text = '{{my.banner_trust_text}}'
 body_header1 = '{{my.body_header1}}'
 body_content1 = '{{my.body_content1}}'
 body_header2 = '{{my.body_header2}}'
@@ -94,8 +96,8 @@ arr.append(page_title)
 arr.append(product_logo)
 arr.append(content_title)
 arr.append(content_subtitle)
-arr.append(banner_trust_icon)
-arr.append(banner_trust_text)
+# arr.append(banner_trust_icon)
+# arr.append(banner_trust_text)
 arr.append(body_header1)
 arr.append(body_content1)
 arr.append(body_header2)
@@ -151,6 +153,10 @@ for cor, url in enumerate(url_list):
 			page = requests.get(site_url)
 			soup = BeautifulSoup(page.text, "html.parser")
 
+			# sort by template
+			page_template = sorting_hat(soup)
+			feedback += page_template
+
 			# my.site_url
 			arr.append(site_url.encode('utf-8'))
 
@@ -177,16 +183,18 @@ for cor, url in enumerate(url_list):
 			# my.content_subtitle
 			content_subtitle = get_content_subtitle(soup)
 			arr.append(content_subtitle)
-			feedback += content_subtitle
 
-			# my.banner_trust_icon
-			arr.append(banner_trust_icon)
-
-			# my.banner_trust_text
-			arr.append(banner_trust_text)
+			# # my.banner_trust_icon
+			# banner_trust_icon = get_banner_trust_icon(soup)
+			# arr.append(banner_trust_icon)
+			#
+			# # my.banner_trust_text
+			# arr.append(banner_trust_text)
 
 			# my.body_header1
+			# body_header1 = get_body_header1(soup)
 			arr.append(body_header1)
+			# feedback += body_header1
 
 			# my.body_content1
 			arr.append(body_content1)

@@ -8,7 +8,6 @@ def get_page_title(soup=''):
 	if str_title:
 		str_title = str_title.encode('utf-8')
 	else:
-		str_title = []
-		print "page_title not found"
+		str_title = ""
 
-	return str_title;
+	return str_title

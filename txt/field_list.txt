@@ -34,6 +34,3 @@ form_header
 custom_body_html
 
 
-<div class="mktoText" id="site_url" mktoName="site_url">
-<div class="mktoText" id="product_name" mktoName="product_name">
-<div class="mktoText" id="page_language" mktoName="page_language">
