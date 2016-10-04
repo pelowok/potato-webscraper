@@ -1,15 +1,13 @@
 import re
 from bs4 import BeautifulSoup
-from get_product_logo import get_product_logo
 
 
-def get_product_name(soup=''):
-	"""deduces the product name from the page content"""
+def get_product_name(logo=''):
+	"""deduces the product name from the logo"""
 
 	prod = ""
 
 	try:
-		logo = get_product_logo(soup).split("/")[-1]
 		prod = products[logo]()
 	except:
 		prod = "undetermined"
