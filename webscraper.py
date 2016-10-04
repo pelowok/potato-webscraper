@@ -155,7 +155,7 @@ for cor, url in enumerate(url_list):
 
 			# sort by template
 			page_template = sorting_hat(soup)
-			feedback += page_template
+			feedback += str(page_template)
 
 			# my.site_url
 			arr.append(site_url.encode('utf-8'))
