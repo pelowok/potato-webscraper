@@ -5,6 +5,8 @@ from bs4 import BeautifulSoup
 from sorting_hat import sorting_hat
 from type01 import type01
 from type02 import type02
+from type03 import type03
+from type04 import type04
 
 # declare vars
 i = 0
@@ -110,11 +112,17 @@ for cor, url in enumerate(url_list):
 			feedback += str(page_template)
 
 			# send soup and [arr] to scrape by type
-			if page_template == 1:
-				arr = type01(site_url, soup, arr)
+			# if page_template == 1:
+			# 	arr = type01(site_url, soup, arr)
+			#
+			# if page_template == 2:
+			# 	arr = type02(site_url, soup, arr)
+			#
+			# if page_template == 3:
+			# 	arr = type03(site_url, soup, arr)
 
-			if page_template == 2:
-				arr = type02(site_url, soup, arr)
+			if page_template == 4:
+				arr = type04(site_url, soup, arr)
 
 			j = 0
 			for val in arr:

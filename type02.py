@@ -23,7 +23,7 @@ def type02(site_url='', soup='', arr=[]):
 	arr.append(product_name)
 
 	# page_language
-	page_language = get_page_language(arr[0])
+	page_language = get_page_language(arr[1])
 	arr.append(page_language)
 
 	# page_title
