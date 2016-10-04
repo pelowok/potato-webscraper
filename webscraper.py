@@ -138,3 +138,4 @@ for cor, url in enumerate(url_list):
 		feedback += "skip"
 
 	print feedback
+print "49 looks to be Type_1 not Type_11"

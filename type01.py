@@ -9,11 +9,6 @@ from get_page_title import get_page_title
 def type01(site_url='', soup='', arr=[]):
 	"""scrape type 1 templates and return arr for data push to workbook"""
 
-	# set some universally needed vars
-	divs = soup.find_all('div')
-	spans = soup.find_all('span')
-	imgs = soup.find_all('img')
-
 	# marketo_template
 	marketo_template = "HANNEMAN"
 	arr.append(marketo_template)

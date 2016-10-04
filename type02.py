@@ -7,15 +7,10 @@ from get_page_title import get_page_title
 
 
 def type02(site_url='', soup='', arr=[]):
-	"""scrape type 1 templates and return arr for data push to workbook"""
-
-	# set some universally needed vars
-	divs = soup.find_all('div')
-	spans = soup.find_all('span')
-	imgs = soup.find_all('img')
+	"""scrape type 2 templates and return arr for data push to workbook"""
 
 	# marketo_template
-	marketo_template = "HANNEMAN"
+	marketo_template = "GILFOYLE"
 	arr.append(marketo_template)
 
 	# site_url
@@ -40,22 +35,16 @@ def type02(site_url='', soup='', arr=[]):
 	arr.append(product_logo)
 
 	# content_title
-	if soup.find("h1"):
-		content_title = ""  # page has no title
-	else:
-		content_title = "STICKY SERVICES"  # http://trials.maxfocus.com/en-max-backup uses text in image
+	content_title = soup.find("span", {"class" : "bannerMainTitle"}).contents[0].strip()
 	arr.append(content_title)
 
 	# content_subtitle
-	if soup.find("h1"):
-		content_subtitle = soup.find("h1", {"class": "ppc_header_title"}).contents[0].strip()
-	else:
-		content_subtitle = "High-value backup and recovery to help you make more money"
+	content_subtitle = soup.find("span", {"class" : "bannerMainContent"}).contents[0].strip()
 	arr.append(content_subtitle)
 
 	# body_content1
 	body_content = soup.find_all("div", {"class" : "main_body"})
-	body_content1 = body_content[0].encode('utf-8')
+	body_content1 = body_content[0].encode('utf-8').split('</span>')[2]
 	arr.append(body_content1)
 
 	# body_content2
@@ -81,12 +70,18 @@ def type02(site_url='', soup='', arr=[]):
 	arr.append(awards_image)
 
 	# whitepaper_url
-	vboxs = soup.find_all("div", {"class" : "videoBox"})
-	whitepaper_url = vboxs[0].encode('utf-8')
+	whitepaper_url = ""
+	if soup.find_all("div", {"class" : "videoBox"}):
+		vboxs = soup.find_all("div", {"class" : "videoBox"})
+		if len(vboxs) > 1:
+			whitepaper_url = vboxs[1].encode('utf-8')
 	arr.append(whitepaper_url)
 
 	# video_url
-	video_url = vboxs[1].encode('utf-8')
+	if soup.find_all("div", {"class": "videoBox"}):
+		video_url = vboxs[0].encode('utf-8')
+	else:
+		video_url = ""
 	arr.append(video_url)
 
 	# testimonial_image1
@@ -123,7 +118,7 @@ def type02(site_url='', soup='', arr=[]):
 	arr.append(testimonial_nametag2)
 
 	# form_header
-	form_header = soup.find("div", {"id": "rightcolumn"}).find("h4").text.encode('utf-8')
+	form_header = soup.find("div", {"id": "rightcolumn"}).find("h2").text.encode('utf-8')
 	form_header = ' '.join(form_header.split())
 	form_header = form_header.replace("TageKOSTENLOS", "Tage KOSTENLOS")
 	arr.append(form_header)
