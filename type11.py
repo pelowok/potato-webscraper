@@ -117,9 +117,10 @@ def type11(site_url='', soup='', arr=[]):
 	arr.append(testimonial_nametag2)
 
 	# form_header
-	form_header = soup.find("div", {"id": "rightcolumn"}).find("h4").text.encode('utf-8')
-	form_header = ' '.join(form_header.split())
-	form_header = form_header.replace("TageKOSTENLOS", "Tage KOSTENLOS")
+	form_header = ""
+	if soup.find("a", {"id": "bot-cta"}):
+		form_header = soup.find("a", {"id": "bot-cta"}).text
+		form_header = ' '.join(form_header.split())
 	arr.append(form_header)
 
 	# custom_body_html
