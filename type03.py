@@ -35,11 +35,11 @@ def type03(site_url='', soup='', arr=[]):
 	arr.append(product_logo)
 
 	# content_title
-	content_title = content_title = soup.find("div", {"class" : "textOverImgBottom"}).contents[0].strip()
+	content_title = soup.find("div", {"class" : "textOverImgBottom"}).contents[0].strip()
 	arr.append(content_title)
 
 	# content_subtitle
-	content_subtitle = content_subtitle = soup.find("div", {"class" : "textOverImgTop"}).contents[0].strip()
+	content_subtitle = soup.find("div", {"class" : "textOverImgTop"}).contents[0].strip()
 	arr.append(content_subtitle)
 
 	# body_content1

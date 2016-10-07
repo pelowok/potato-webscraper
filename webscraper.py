@@ -109,7 +109,9 @@ for cor, url in enumerate(url_list):
 
 			# sort by template
 			page_template = sorting_hat(soup)
-			feedback += str(page_template)
+			if page_template == 4:
+				feedback += str(page_template)
+
 
 			# send soup and [arr] to scrape by type
 			# if page_template == 1:
