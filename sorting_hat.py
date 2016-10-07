@@ -18,7 +18,12 @@ def sorting_hat(soup=''):
 				code = 'rm-msp-template-1'
 
 	for lpe_div in soup.find_all("div", {"id" : re.compile('^lpeCDiv')}):
-		code = 'lpeCDiv'
+		if soup.find_all("span", {"mktoname" : "Hero Styling"}):
+			code = 'Hero Styling'
+		elif soup.find_all("div", {"class" : "sitecontainer"}):
+			code = '1642402159'
+		else:
+			code = 'lpeCDiv'
 
 	if soup.find("div", {"class": "background-sun"}):
 		code = 'background-sun'
@@ -103,4 +108,5 @@ templates = {'1642402159': type01,
 			'rm-msp-template-1': type10,
 			'lpeCDiv': type11,
 			'background-sun': type12,
-			'unknown': unknown}
+			'unknown': unknown,
+			 'Hero Styling': type13}

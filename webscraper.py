@@ -7,6 +7,9 @@ from type01 import type01
 from type02 import type02
 from type03 import type03
 from type04 import type04
+from type11 import type11
+from type12 import type12
+from type13 import type13
 
 # declare vars
 i = 0
@@ -109,7 +112,7 @@ for cor, url in enumerate(url_list):
 
 			# sort by template
 			page_template = sorting_hat(soup)
-			# if page_template == 4:
+			# if page_template == 11:
 			# 	feedback += str(page_template)
 			feedback += str(page_template)
 
@@ -126,6 +129,15 @@ for cor, url in enumerate(url_list):
 
 			if page_template == 4:
 				arr = type04(site_url, soup, arr)
+
+			if page_template == 11:
+				arr = type11(site_url, soup, arr)
+
+			if page_template == 12:
+				arr = type12(site_url, soup, arr)
+
+			if page_template == 13:
+				arr = type13(site_url, soup, arr)
 
 			j = 0
 			for val in arr:
@@ -149,4 +161,3 @@ for cor, url in enumerate(url_list):
 		feedback += "skip"
 
 	print feedback
-print "49 looks to be Type_1 not Type_11"

@@ -118,7 +118,10 @@ def type01(site_url='', soup='', arr=[]):
 	arr.append(testimonial_nametag2)
 
 	# form_header
-	form_header = soup.find("div", {"id": "rightcolumn"}).find("h4").text.encode('utf-8')
+	if soup.find("div", {"id": "rightcolumn"}).find("h4"):
+		form_header = soup.find("div", {"id": "rightcolumn"}).find("h4").text.encode('utf-8')
+	elif soup.find("div", {"id": "rightcolumn"}).find("h2"):
+		form_header = soup.find("div", {"id": "rightcolumn"}).find("h2").text.encode('utf-8')
 	form_header = ' '.join(form_header.split())
 	form_header = form_header.replace("TageKOSTENLOS", "Tage KOSTENLOS")
 	arr.append(form_header)
