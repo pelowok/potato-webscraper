@@ -109,19 +109,20 @@ for cor, url in enumerate(url_list):
 
 			# sort by template
 			page_template = sorting_hat(soup)
-			if page_template == 4:
-				feedback += str(page_template)
+			# if page_template == 4:
+			# 	feedback += str(page_template)
+			feedback += str(page_template)
 
 
 			# send soup and [arr] to scrape by type
-			# if page_template == 1:
-			# 	arr = type01(site_url, soup, arr)
-			#
-			# if page_template == 2:
-			# 	arr = type02(site_url, soup, arr)
-			#
-			# if page_template == 3:
-			# 	arr = type03(site_url, soup, arr)
+			if page_template == 1:
+				arr = type01(site_url, soup, arr)
+
+			if page_template == 2:
+				arr = type02(site_url, soup, arr)
+
+			if page_template == 3:
+				arr = type03(site_url, soup, arr)
 
 			if page_template == 4:
 				arr = type04(site_url, soup, arr)
