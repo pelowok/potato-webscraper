@@ -81,11 +81,14 @@ def type01(site_url='', soup='', arr=[]):
 	arr.append(whitepaper_url)
 
 	# video_url
-	video_url = vboxs[1].encode('utf-8')
-	arr.append(video_url)
+	if len(vboxs) >= 2:
+		video_url = vboxs[1].encode('utf-8')
+		arr.append(video_url)
+	else:
+		print "vboxs[1] does not exist"
 
 	# testimonial_image1
-	if soup.find("div", {"class" : "testimonialImg"}):
+	if soup.find("div", {"class" : "testimonialImg"}).find("img"):
 		testimonial_image1 = soup.find("div", {"class" : "testimonialImg"}).find("img")["src"].encode('utf-8').split('?')[0].split("/")[-1]
 	else:
 		testimonial_image1 = ""
